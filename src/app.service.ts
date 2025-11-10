@@ -76,6 +76,7 @@ export class AppService {
 
     try {
       this.logger.debug(`Refreshing access token via ${url}`);
+      console.log(body)
       const response = await firstValueFrom(
         this.httpClient.post(url, body.toString(), { headers }),
       );
@@ -91,13 +92,15 @@ export class AppService {
       return newAccessToken;
     } catch (error: any) {
       if (error.response) {
-        this.logger.error(
-          `Token refresh error: ${error.response.status} ${JSON.stringify(error.response.data)}`,
-        );
+        console.error(error.response.data);
+        //this.logger.error(
+        //  `Token refresh error: ${error.response.status} ${JSON.stringify(error.response.data)}`,
+        //);
       } else {
-        this.logger.error(`Token refresh failed: ${error.message}`);
+        //this.logger.error(`Token refresh failed: ${error.message}`);
       }
-      throw error;
+      //throw error;
+      return "";
     }
   }
 
